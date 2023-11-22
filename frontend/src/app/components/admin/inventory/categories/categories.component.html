@@ -1,0 +1,83 @@
+<div class="row">
+  <div class="d-flex justify-content-between">
+    <h1>Listado de Categorias</h1>
+    <button mat-raised-button color="primary" (click)="newCategory()">
+      Categoria<mat-icon>add_circle</mat-icon></button>
+  </div>
+  <mat-divider class="mb-3"></mat-divider>
+
+  <mat-card class="container mx-auto animate__animated animate__fadeIn">
+    <table mat-table [dataSource]="dataSource" matSort matSortDirection="asc">
+
+      <!-- Title Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Categoria</th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <!-- Active Column -->
+      <ng-container matColumnDef="active">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+        <td mat-cell *matCellDef="let element">
+          <mat-icon *ngIf="element.active" class="text-success">done</mat-icon>
+          <mat-icon *ngIf="!element.active" class="text-danger">close</mat-icon>
+        </td>
+      </ng-container>
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef class="text-center"> Acciones </th>
+        <td mat-cell *matCellDef="let element" class="text-center">
+          <button mat-mini-fab color="primary" class="mx-2" (click)="editCategory(element)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-mini-fab color="warn" *ngIf="!element.active" class="mx-2"
+            (click)="disableEnableCategory(element)">
+            <mat-icon>power_settings_new</mat-icon>
+          </button>
+          <button mat-mini-fab color="accent" class="mx-2" *ngIf="element.active"
+            (click)="disableEnableCategory(element)">
+            <mat-icon>power_settings_new</mat-icon>
+          </button>
+          <button mat-mini-fab color="warn" class="mx-2">
+            <mat-icon class="white">delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
+    </table>
+    <mat-divider></mat-divider>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+  </mat-card>
+
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" #modalCategory data-bs-backdrop="static" data-bs-keyboard="false"
+    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">{{modalTitle}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="formCategory">
+            <div class="form-group">
+              <label for="name">Nombre de la categoria:</label>
+              <input type="text" class="form-control" placeholder="Categoria" formControlName="name">
+              <small *ngIf="isValid('name')" class="form-text text-danger">Este campo es requerido y debe tener minimo 3
+                caracteres</small>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closeModal()">Cerrar</button>
+          <button type="button" class="btn btn-primary" [disabled]="formCategory.invalid"
+            (click)="submit()">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
