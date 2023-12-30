@@ -13,7 +13,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-declare var window: any;
 
 @Component({
   selector: 'app-categories',
@@ -43,15 +42,20 @@ export class CategoriesComponent implements OnInit, AfterViewInit {
 
   /** Category Form */
   formCategory: FormGroup = this.fb.group({
+    id: [],
     name: ['', [Validators.required, Validators.minLength(3)]],
   });
 
   /** Load all categories */
   loadCategories(): void {
     this.categoryService.loadAllCategoriries().subscribe((res: any) => {
-      this.dataSource = new MatTableDataSource(res.content);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+      if (res) {
+        this.dataSource = new MatTableDataSource(res.content);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      } else {
+        this.toast.info('No hay categorias registradas');
+      }
     });
   }
 
@@ -85,14 +89,26 @@ export class CategoriesComponent implements OnInit, AfterViewInit {
       return;
     }
 
-    this.categoryService
-      .createCategory(this.formCategory.value)
-      .subscribe((res: Category) => {
-        this.toast.success(`${res.name}, se registro correctamente`);
-        this.loadCategories();
-        this.categoryModal.hide();
-        this.formCategory.reset();
-      });
+    const id = this.formCategory.controls['id'].value;
+    if (id) {
+      this.categoryService
+        .editCategory(this.formCategory.value)
+        .subscribe((res: Category) => {
+          this.toast.success(`${res.name}, se actualizo correctamente`);
+          this.loadCategories();
+          this.categoryModal.hide();
+          this.formCategory.reset();
+        });
+    } else {
+      this.categoryService
+        .createCategory(this.formCategory.value)
+        .subscribe((res: Category) => {
+          this.toast.success(`${res.name}, se registro correctamente`);
+          this.loadCategories();
+          this.categoryModal.hide();
+          this.formCategory.reset();
+        });
+    }
   }
 
   isValid(field: any) {

@@ -8,9 +8,15 @@ import { MaterialModule } from '../../shared/material/material.module';
 import { CategoriesComponent } from './categories/categories.component';
 import { ProductsComponent } from './products/products.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ProductFormComponent } from './products/product-form/product-form.component';
 
 @NgModule({
-  declarations: [InventoryComponent, CategoriesComponent, ProductsComponent],
+  declarations: [
+    InventoryComponent,
+    CategoriesComponent,
+    ProductsComponent,
+    ProductFormComponent,
+  ],
   imports: [
     CommonModule,
     InventoryRoutingModule,

@@ -11,7 +11,7 @@ import java.util.UUID;
 
 public interface ICategoryService {
 
-    Page<Category> findAll(Pageable pageable);
+    Page<Category> findAllByOrderByIdAsc(Pageable pageable);
 
     Optional<Category> findById(UUID categoryID);
 

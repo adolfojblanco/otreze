@@ -40,7 +40,6 @@ public class JwtAuthenticationFilter  extends OncePerRequestFilter {
         String username = jwtServices.extractUsername(jwt);
 
         UserDetails userDetails = userService.findOneByUsername(username).orElseThrow(() -> new ObjectNotFoundException("User not found, " + username));
-        System.out.println(userDetails.getAuthorities());
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                 username, null, userDetails.getAuthorities().stream().toList()
         );

@@ -19,14 +19,14 @@ public class CategoryController {
     @Autowired
     private ICategoryService categoryService;
 
-    /* Get all categories */
+    /* Get all categories paginate */
     @GetMapping
     public ResponseEntity<Page<Category>> findAll(Pageable pageable) {
-        Page<Category> categoryPage = categoryService.findAll(pageable);
+        Page<Category> categoryPage = categoryService.findAllByOrderByIdAsc(pageable);
         if (categoryPage.hasContent()) {
             return ResponseEntity.ok(categoryPage);
         }
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.noContent().build();
     }
 
     @PostMapping
@@ -40,6 +40,12 @@ public class CategoryController {
     public ResponseEntity<UUID> disableById(@PathVariable UUID categoryId) {
         Category category = categoryService.disableById(categoryId);
         return ResponseEntity.status(HttpStatus.OK).body(categoryId);
+    }
+
+    @PutMapping("/{categoryId}")
+    public ResponseEntity<Category> updateById(@PathVariable UUID categoryId, @RequestBody @Validated Category category){
+        Category cat = categoryService.update(categoryId, category);
+        return ResponseEntity.status(HttpStatus.OK).body(cat);
     }
 
 }

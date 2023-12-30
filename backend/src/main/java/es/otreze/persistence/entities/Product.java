@@ -33,11 +33,7 @@ public class Product {
 
     private Boolean hasStock;
 
-    @Enumerated(EnumType.STRING)
-    private ProductStatus status;
+    private Boolean status;
 
-    public static enum ProductStatus {
-        ENABLED, DISABLED
-    }
 
 }

@@ -52,7 +52,6 @@ public class User implements UserDetails {
         if (roles == null) return null;
         List<SimpleGrantedAuthority> authorities = this.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getName())).collect(Collectors.toList());
-        System.out.println(authorities);
         return authorities;
     }
 

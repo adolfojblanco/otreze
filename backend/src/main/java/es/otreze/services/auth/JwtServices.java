@@ -30,7 +30,7 @@ public class JwtServices {
         extraClaims.put("name", user.getFullName());
         extraClaims.put("username", user.getUsername());
         extraClaims.put("roles", user.getAuthorities().toString());
-        extraClaims.put("authorities", user.getRoles().toString());
+        //extraClaims.put("authorities", user.getRoles().toString());
         return extraClaims;
     }
 

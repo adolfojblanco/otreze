@@ -49,9 +49,9 @@ public class AuthenticationService {
 
         User user = userService.findOneByUsername(auth.getUsername()).orElseThrow();
         String access_token = jwtServices.generateToken(user, jwtServices.generateExtraClaims(user));
-        AuthenticationResponseDTO autRes = new AuthenticationResponseDTO();
-        autRes.setAccess_token(access_token);
-        return autRes;
+        AuthenticationResponseDTO authRes = new AuthenticationResponseDTO();
+        authRes.setAccess_token(access_token);
+        return authRes;
     }
 
 

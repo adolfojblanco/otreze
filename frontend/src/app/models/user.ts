@@ -11,4 +11,5 @@ export interface User {
 enum UserRole {
   USER_ROL = 'USER_ROL',
   ADMIN_ROL = 'ADMIN_ROL',
+  CUSTOMER_ROL = 'CUSTOMER_ROL',
 }

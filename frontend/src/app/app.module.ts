@@ -10,7 +10,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HotToastModule } from '@ngneat/hot-toast';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LOCALE_ID } from '@angular/core';
+import localeEs from '@angular/common/locales/es';
 import { AuthInterceptorService } from './services/auth.interceptor';
+import { registerLocaleData } from '@angular/common';
+import * as $ from 'jquery';
+
+registerLocaleData(localeEs);
 
 @NgModule({
   declarations: [AppComponent, AuthComponent],

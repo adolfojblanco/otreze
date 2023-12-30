@@ -40,7 +40,7 @@ public class ProductServiceImpl implements IProductService {
         Product product = new Product();
         product.setName(saveProduct.getName());
         product.setPrice(saveProduct.getPrice());
-        product.setStatus(Product.ProductStatus.ENABLED);
+        product.setStatus(true);
         product.setStock(saveProduct.getStock());
         product.setHasStock(saveProduct.getHasStock());
 
@@ -71,7 +71,7 @@ public class ProductServiceImpl implements IProductService {
     @Transactional
     public Product disableById(UUID productId) {
         Product productFromBD = productRepository.findById(productId).orElseThrow(() -> new ObjectNotFoundException("Product not found with id " + productId));
-        productFromBD.setStatus(Product.ProductStatus.DISABLED);
+        productFromBD.setStatus(!productFromBD.getStatus());
         return productRepository.save(productFromBD);
     }
 }

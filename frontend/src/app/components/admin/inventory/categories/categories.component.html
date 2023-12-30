@@ -1,6 +1,6 @@
 <div class="row">
   <div class="d-flex justify-content-between">
-    <h1>Listado de Categorias</h1>
+    <h3>Listado de Categorias</h3>
     <button mat-raised-button color="primary" (click)="newCategory()">
       Categoria<mat-icon>add_circle</mat-icon></button>
   </div>
@@ -39,9 +39,6 @@
             (click)="disableEnableCategory(element)">
             <mat-icon>power_settings_new</mat-icon>
           </button>
-          <button mat-mini-fab color="warn" class="mx-2">
-            <mat-icon class="white">delete</mat-icon>
-          </button>
         </td>
       </ng-container>
 
@@ -49,14 +46,12 @@
       <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
     </table>
     <mat-divider></mat-divider>
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
   </mat-card>
 
   <!-- Modal -->
-  <div class="modal fade" id="staticBackdrop" #modalCategory data-bs-backdrop="static" data-bs-keyboard="false"
-    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal fade" #modalCategory data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -66,7 +61,7 @@
         <div class="modal-body">
           <form [formGroup]="formCategory">
             <div class="form-group">
-              <label for="name">Nombre de la categoria:</label>
+              <label for="name">Categoria:</label>
               <input type="text" class="form-control" placeholder="Categoria" formControlName="name">
               <small *ngIf="isValid('name')" class="form-text text-danger">Este campo es requerido y debe tener minimo 3
                 caracteres</small>

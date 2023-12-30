@@ -1,5 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HotToastService } from '@ngneat/hot-toast';
+import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -25,6 +27,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginComponent {
   private fb = inject(FormBuilder);
   private authService = inject(AuthService);
+  private toast = inject(HotToastService);
 
   public formLogin: FormGroup = this.fb.group({
     username: ['', [Validators.required]],
@@ -37,7 +40,10 @@ export class LoginComponent {
       return;
     }
 
-    this.authService.login(this.formLogin.value).subscribe((res: any) => {});
+    this.authService.login(this.formLogin.value).subscribe((res: any) => {
+      const user: User = this.authService.getUserDetails();
+      this.toast.success(`Hola, ${user.username}`);
+    });
   }
 
   isValid(campo: string) {

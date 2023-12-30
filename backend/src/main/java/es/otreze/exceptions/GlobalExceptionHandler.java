@@ -62,7 +62,7 @@ public class GlobalExceptionHandler {
         apiError.setBackendMessage(exception.getLocalizedMessage());
         apiError.setUrl(request.getRequestURL().toString());
         apiError.setMethod(request.getMethod());
-        apiError.setMessage("Acceso denegaddo no tienes los permisos para acceder a este recurso");
+        apiError.setMessage("Acceso denegaddo, no tienes los permisos para acceder a este recurso");
         apiError.setTimeStamp(LocalDateTime.now());
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(apiError);
     }

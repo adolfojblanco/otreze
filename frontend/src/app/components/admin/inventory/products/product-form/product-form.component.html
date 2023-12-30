@@ -1,0 +1,40 @@
+<form autocomplete="off" class="row" [formGroup]="productForm">
+  <p>
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Producto</mat-label>
+      <input type="text" matInput placeholder="Producto" formControlName="name" class="full-width" required>
+      <mat-hint *ngIf="isValid('name')">
+        {{getFieldError('name')}}
+      </mat-hint>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Categoria</mat-label>
+      <mat-select formControlName="categoryId">
+        <mat-option *ngFor="let category of categories" [value]="category.id">
+          {{category.name}}
+        </mat-option>
+      </mat-select>
+      <mat-hint *ngIf="isValid('categoryId')">
+        {{getFieldError('categoryId')}}
+      </mat-hint>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Precio de Venta</mat-label>
+      <input type="number" matInput placeholder="Precio de Venta" formControlName="price" class="full-width" required>
+      <mat-hint *ngIf="isValid('sellPrice')">
+        {{getFieldError('sellPrice')}}
+      </mat-hint>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-checkbox formControlName="hasStock">Tiene inventario</mat-checkbox>
+  </p>
+</form>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary"  (click)="close()">Close</button>
+  <button type="button" class="btn btn-primary" (click)="submit()">Guardar</button>
+</div>

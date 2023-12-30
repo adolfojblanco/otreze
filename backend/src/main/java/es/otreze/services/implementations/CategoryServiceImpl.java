@@ -21,7 +21,7 @@ public class CategoryServiceImpl implements ICategoryService {
 
     @Override
     @Transactional(readOnly = true)
-    public Page<Category> findAll(Pageable pageable) {
+    public Page<Category> findAllByOrderByIdAsc(Pageable pageable) {
         return categoryRepository.findAll(pageable);
     }
 
