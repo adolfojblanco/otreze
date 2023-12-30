@@ -13,6 +13,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Product } from 'src/app/models/product';
 import { ProductsService } from 'src/app/services/products.service';
 import * as bootstrap from 'bootstrap';
+import { error } from 'jquery';
 declare var window: any;
 @Component({
   selector: 'app-products',
@@ -47,6 +48,10 @@ export class ProductsComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.loadProduct();
+  }
+
+  loadProduct() {
     this.productServices.getAllProducts().subscribe((res: any) => {
       this.dataSource = res.content;
       this.dataSource.sortData = res.content;
@@ -54,10 +59,18 @@ export class ProductsComponent implements OnInit, AfterViewInit {
   }
 
   newProduct() {
+    this.modalTitle = 'Nuevo Producto';
     this.productModal.show();
   }
 
-  editProduct(element: Product) {}
+  submitForm() {
+    console.log('Submit');
+  }
+
+  editProduct(element: Product) {
+    this.modalTitle = 'Editar Producto';
+    this.productModal.show();
+  }
 
   disableEnableProduct(element: Product) {}
 

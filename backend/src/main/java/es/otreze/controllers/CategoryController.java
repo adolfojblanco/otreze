@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -29,12 +31,17 @@ public class CategoryController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/active")
+    public Optional<List<Category>> findAllActiveCategories() {
+        Optional<List<Category>> categories = categoryService.findAllActiveCategories();
+        return categories;
+    }
+
     @PostMapping
     public ResponseEntity<Category> create(@RequestBody @Validated Category cat) {
         Category category = categoryService.create(cat);
         return ResponseEntity.status(HttpStatus.CREATED).body(category);
     }
-
 
     @PutMapping("/{categoryId}/disabled")
     public ResponseEntity<UUID> disableById(@PathVariable UUID categoryId) {

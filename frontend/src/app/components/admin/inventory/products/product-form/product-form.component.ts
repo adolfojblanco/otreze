@@ -39,8 +39,12 @@ export class ProductFormComponent implements OnInit {
   isValid(field: string) {}
 
   ngOnInit() {
-    this.categoryServices.loadAllCategoriries().subscribe((res: any) => {
-      this.categories = res.content;
+    this.loadActiveCategories(); // load active categories
+  }
+
+  loadActiveCategories() {
+    this.categoryServices.loadActiveCategories().subscribe((res: any) => {
+      this.categories = res;
     });
   }
 
@@ -61,7 +65,7 @@ export class ProductFormComponent implements OnInit {
   }
 
   submit() {
-    
+    console.log('submit');
   }
 
   close() {

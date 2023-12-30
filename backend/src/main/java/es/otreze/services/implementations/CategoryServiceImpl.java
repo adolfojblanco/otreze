@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -24,6 +25,13 @@ public class CategoryServiceImpl implements ICategoryService {
     public Page<Category> findAllByOrderByIdAsc(Pageable pageable) {
         return categoryRepository.findAll(pageable);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<List<Category>> findAllActiveCategories() {
+    return categoryRepository.findByIsActiveTrue();
+    }
+
 
     @Override
     @Transactional(readOnly = true)

@@ -32,7 +32,7 @@ public class ProductController {
         if (productsPage.hasContent()){
             return ResponseEntity.ok(productsPage);
         }
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.noContent().build();
     }
 
 

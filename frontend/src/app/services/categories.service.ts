@@ -15,6 +15,10 @@ export class CategoriesService {
     return this.http.get<Category[]>(this.urlEndPoint);
   }
 
+  loadActiveCategories() {
+     return this.http.get<Category[]>(`${this.urlEndPoint}/active`);
+  }
+
   createCategory(category: Category): Observable<Category> {
     return this.http.post<Category>(this.urlEndPoint, category);
   }

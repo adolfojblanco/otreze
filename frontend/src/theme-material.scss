@@ -11,9 +11,9 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$frontend-primary: mat.define-palette(mat.$indigo-palette, 500);
-$frontend-accent: mat.define-palette(mat.$mat-amber, A200, A100, A400);
-$frontend-warn: mat.define-palette(mat.$red-palette);
+$frontend-primary: mat.define-palette(mat.$blue-palette, 700);
+$frontend-accent: mat.define-palette(mat.$teal-palette, 200, 700);
+$frontend-warn: mat.define-palette(mat.$red-palette, 500);
 
 // The warn palette is optional (defaults to red).
 
@@ -39,8 +39,8 @@ $frontend-theme: mat.define-light-theme(
 html,
 body {
   height: 100%;
-}
-body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  color: white;
+  background-color: aqua;
 }

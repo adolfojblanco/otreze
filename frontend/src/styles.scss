@@ -1,9 +1,11 @@
 @use "node_modules/bootstrap/scss/bootstrap.scss";
-@import "src/theme-material.scss";
 @use "node_modules/@ngneat/hot-toast/src/styles/styles.scss";
 
 .spacer {
   flex: 1 1 auto;
+}
+.mat-accent {
+  color: #f8f9fa;
 }
 
 .form {

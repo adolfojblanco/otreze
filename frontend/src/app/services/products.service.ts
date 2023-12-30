@@ -9,15 +9,15 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ProductsService {
   private readonly urlEndPoint: string = `${environment.apiUrl}/products`;
-  private http = inject(HttpClient)
+  private http = inject(HttpClient);
 
   constructor() {}
 
   getAllProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.urlEndPoint)
+    return this.http.get<Product[]>(this.urlEndPoint);
   }
 
-  newProduct() {
-    
+  createProduct(product: Product) {
+    console.log(product);
   }
 }

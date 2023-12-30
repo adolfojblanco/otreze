@@ -29,7 +29,7 @@ export class MenuComponent implements OnInit, AfterViewInit {
     { label: 'Caja', icon: 'euro', url: './cashbox' },
     {
       label: 'Categorias',
-      icon: 'ti ti-category',
+      icon: 'category',
       url: '/admin/inventory/categories',
     },
     { label: 'Gastos', icon: 'payments', url: './expenses' },
